@@ -36,7 +36,9 @@ Class OneFichierSite {
 	 *
 	 * @return OneFichierSite
 	 *
-	 * @throws InvalidCredentialsException if the credential are not valid
+	 * @throws InvalidCredentialsException The credential are not valid
+	 * 
+	 * @throws CurlException Cannot execute correctly a curl command
 	 */
 	public function __construct($username, $password = "", $cookie = "") {
 		$this->username = $username;
@@ -193,7 +195,16 @@ Class OneFichierSite {
 		return $all_links;
 	}
 	
-	/*Remotes some files to a folder*/
+	/*
+	 * Remotes some files to a folder
+	 * 
+	 * 
+	 * @throws TooManyRefreshException Cannot remote due to too many remote alredy done.
+	 * 			10 is the limit for free account.
+	 * 
+	 * @throws AlreadyRequestedLinkException The link has already been requested
+	 * 
+	 * */
 	public function remoteUploadFiles($link, $folderFichier = 0) {
 		$url = "https://1fichier.com/console/remote.pl";
 		$ref = "https://1fichier.com/console/remote.pl";
